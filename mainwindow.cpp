@@ -201,7 +201,7 @@ void MainWindow::setupLedger(QTextStream * inputStream)
     openingMsg->hide();
     ui->ledgerView->setLedger(ledger);
 
-    connect(ledger,&Ledger::ledgerChanged,this,&setWindowModified);
+    connect(ledger,&Ledger::ledgerChanged,this,&MainWindow::setWindowModified);
     connect(ledger,&Ledger::ledgerChanged,ui->actionSave,&QAction::setEnabled);
 }
 
