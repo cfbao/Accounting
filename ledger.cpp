@@ -48,10 +48,10 @@ void Ledger::readFile(QTextStream *inputStream)
     }
     undoStack->setClean();
     // setup signals
-    connect(this,&QAbstractItemModel::dataChanged, this,&computeTotal);
-    connect(this,&QAbstractItemModel::rowsRemoved, this,&computeTotal);
-    connect(this,&QAbstractItemModel::rowsInserted,this,&computeTotal);
-    connect(undoStack,&QUndoStack::cleanChanged, this,&sendChangeSignal);
+    connect(this,&QAbstractItemModel::dataChanged, this,&Ledger::computeTotal);
+    connect(this,&QAbstractItemModel::rowsRemoved, this,&Ledger::computeTotal);
+    connect(this,&QAbstractItemModel::rowsInserted,this,&Ledger::computeTotal);
+    connect(undoStack,&QUndoStack::cleanChanged, this,&Ledger::sendChangeSignal);
 }
 
 bool Ledger::readCsv(QTextStream *stream)
