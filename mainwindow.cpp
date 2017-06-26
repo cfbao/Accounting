@@ -13,15 +13,15 @@
 #include <QStandardPaths>
 #include <QDesktopWidget>
 
-QFont MainWindow::textFont = MainWindow::defaultTextFont();
-QFont MainWindow:: numFont = MainWindow::defaultNumFont();
+QFont *MainWindow::textFont = nullptr;
+QFont *MainWindow:: numFont = nullptr;
 
 MainWindow::MainWindow(QString filePath, QWidget *parent) : QMainWindow(parent)
 {
     // setup ui
     ui = (new Ui::MainWindow);
     ui->setupUi(this);
-    ui->centralWidget->setFont(textFont);
+    ui->centralWidget->setFont(*textFont);
 
     // setup ledgerView
     ui->ledgerView->setLedger(Q_NULLPTR);
@@ -45,10 +45,10 @@ MainWindow::MainWindow(QString filePath, QWidget *parent) : QMainWindow(parent)
     ui->netBox  ->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
     ui->debtBox ->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
     ui->loanBox ->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
-    ui->totalBox->setFont(numFont);
-    ui->netBox  ->setFont(numFont);
-    ui->debtBox ->setFont(numFont);
-    ui->loanBox ->setFont(numFont);
+    ui->totalBox->setFont(*numFont);
+    ui->netBox  ->setFont(*numFont);
+    ui->debtBox ->setFont(*numFont);
+    ui->loanBox ->setFont(*numFont);
 
     // setup Actions
     ui->actionNew->setShortcut(QKeySequence::New);

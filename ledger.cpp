@@ -88,7 +88,7 @@ bool Ledger::checkCsvRow(QList<QStandardItem*> &row, QString &field, QChar ch)
             QDate fieldDate = QDate::fromString(field,Qt::ISODate);
             item->setData(QVariant(fieldDate),Qt::EditRole);
             item->setData(Qt::AlignCenter,Qt::TextAlignmentRole);
-            item->setData(MainWindow::numFont,Qt::FontRole);
+            item->setData(*MainWindow::numFont,Qt::FontRole);
         } else if( row.size()==COL_DESCRIP ) {
             item->setData(QVariant(field),Qt::EditRole);
             item->setData(int(Qt::AlignLeft|Qt::AlignVCenter),Qt::TextAlignmentRole);
@@ -98,7 +98,7 @@ bool Ledger::checkCsvRow(QList<QStandardItem*> &row, QString &field, QChar ch)
             if(numeric && fieldNum!=qQNaN())
                 item->setData(QVariant(fieldNum),Qt::EditRole);
             item->setData(int(Qt::AlignRight|Qt::AlignVCenter),Qt::TextAlignmentRole);
-            item->setData(MainWindow::numFont,Qt::FontRole);
+            item->setData(*MainWindow::numFont,Qt::FontRole);
         } else if( row.size()==COL_CATEG ) {
             bool isInt;
             int fieldInt = field.toInt(&isInt);
@@ -194,14 +194,14 @@ QList<QStandardItem *> Ledger::constructEmptyRow()
         if(i==COL_DATE){
             item = new LedgerItem;
             item->setData(Qt::AlignCenter,Qt::TextAlignmentRole);
-            item->setData(MainWindow::numFont,Qt::FontRole);
+            item->setData(*MainWindow::numFont,Qt::FontRole);
         } else if(i==COL_DESCRIP){
             item = new LedgerItem;
             item->setData(int(Qt::AlignLeft|Qt::AlignVCenter),Qt::TextAlignmentRole);
         } else if(i==COL_PRICE){
             item = new LedgerItem;
             item->setData(int(Qt::AlignRight|Qt::AlignVCenter),Qt::TextAlignmentRole);
-            item->setData(MainWindow::numFont,Qt::FontRole);
+            item->setData(*MainWindow::numFont,Qt::FontRole);
         } else if(i==COL_CATEG){
             item = new LedgerItem;
             item->setData(int(Qt::AlignLeft|Qt::AlignVCenter),Qt::TextAlignmentRole);

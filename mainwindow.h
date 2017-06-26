@@ -23,9 +23,9 @@ public:
     explicit MainWindow(QString filePath = QString(), QWidget *parent = 0);
     ~MainWindow();
     void initialize(bool defaultDir = true);
-    static QFont textFont, numFont;
-    static QFont defaultTextFont() { QFont font("Calibri",11); font.insertSubstitution("Calibri","Microsoft YaHei"); return font; }
-    static QFont defaultNumFont() { return QFont("Lucida Console",11); }
+    static QFont *textFont, *numFont;
+    static QFont* defaultTextFont() { QFont *font = new QFont("Calibri",11); font->insertSubstitution("Calibri","Microsoft YaHei"); return font; }
+    static QFont* defaultNumFont() { return new QFont("Lucida Console",11); }
 public slots:
     void filesDropped(const QList<QUrl> &urls);
 protected:

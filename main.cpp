@@ -6,6 +6,9 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setApplicationName(QObject::tr("AT Accountning"));
 
+    MainWindow::textFont = MainWindow::defaultTextFont();
+    MainWindow::numFont = MainWindow::defaultNumFont();
+
     // command line parsing
     QStringList cmdArg = QCoreApplication::arguments();
     QString filePath;

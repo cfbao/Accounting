@@ -11,12 +11,13 @@ LedgerView::LedgerView(QWidget *parent) : QTableView(parent)
     horizontalHeader()->setSectionsMovable(true);
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     setVerticalHeader(new LedgerVHeader);
+    setSortingEnabled(true);
+    setAcceptDrops(true);
+
+    // setItemDelegate removes but does not delete existing delegate
     QAbstractItemDelegate* d = itemDelegate();
     setItemDelegate(new LedgerDelegate);
     delete d;
-    setSortingEnabled(true);
-
-    setAcceptDrops(true);
 
     actionInsertRowAbove = new QAction(tr("Insert Empty Row &Above"),this);
     actionInsertRowBelow = new QAction(tr("Insert Empty Row &Below"),this);
@@ -46,9 +47,12 @@ LedgerView::LedgerView(QWidget *parent) : QTableView(parent)
 void LedgerView::setLedger(Ledger * ledger)
 {
     this->ledger = ledger;
+
+    // setModel removes old model and selection model, but doesn't delete them
     QItemSelectionModel* m = selectionModel();
     setModel(ledger);
     delete m;
+
     if( ledger && ledger->isValidFile() && ledger->columnCount()==Ledger::NCOL ){
         setColumnWidth(Ledger::COL_DATE,   120);
         setColumnWidth(Ledger::COL_DESCRIP,200);
